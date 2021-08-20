@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The search continues</title>
+    <link rel="stylesheet" href="search.css">
+</head>
+<body>
+    <a href="/logout"><button type="submit">Logout</button></a>
+    <form method="POST" action="/search">
+        <h1>Lets find an animal!</h1>
+        <p>Type an animal name:</p>
+        <input type="search" id="search" name="search" placeholder="Search...">
+        <p>Choose your database:</p>
+        <select type="text" id="database" name="database">
+            <option value="Postgres">Postgres</option>
+            <option value="Mongodb">Mongodb</option>
+            <option value="Both">Both</option>
+        </select>
+        <button type="submit">Search</button>
+
+
+        <ul>
+            {% if postgresList or bothList %}
+                {% for post in postgres %}
+                    <li>Postgres: Scientific Name: {{ post.animals }} Common Name: {{ post.common_name }}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+        <ul>
+            {% if mongoList or bothList %}
+                {% for mongo in mongodb %}
+                    <li>Mongodb: Scientific Name: {{ mongo.animals }} Common Name: {{ mongo.common_name }}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </form>
+</body>
+</html>
